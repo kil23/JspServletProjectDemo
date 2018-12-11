@@ -16,9 +16,13 @@ public class Registerform {
 	private String addr ;
 	private String password ;
 	private String cpassword ;
+	private String yrExp;
+	private String expectedPay;
+	private String noChild;
+	private String spouse;
 	
 	public Registerform(String fname, String lname, String phone, Type type, String email, String addr, String password,
-			String cpassword) {
+			String cpassword, String yrExp, String expectedPay, String noChild, String spouse) {
 		super();
 		this.fname = fname;
 		this.lname = lname;
@@ -28,6 +32,10 @@ public class Registerform {
 		this.addr = addr;
 		this.password = password;
 		this.cpassword = cpassword;
+		this.yrExp = yrExp;
+		this.expectedPay = expectedPay;
+		this.noChild = noChild;
+		this.spouse = spouse;
 	}
 
 	private HashMap<String,String> errorsReg = new HashMap<>();
@@ -125,6 +133,31 @@ public class Registerform {
 	public void setCpassword(String cpassword) {
 		this.cpassword = cpassword;
 	}
+	public String getYrExp() {
+		return yrExp;
+	}
+	public void setYrExp(String yrExp) {
+		this.yrExp = yrExp;
+	}
+	public String getExpectedPay() {
+		return expectedPay;
+	}
+	public void setExpectedPay(String expectedPay) {
+		this.expectedPay = expectedPay;
+	}
+	public String getNoChild() {
+		return noChild;
+	}
+	public void setNoChild(String noChild) {
+		this.noChild = noChild;
+	}
+	public String getSpouse() {
+		return spouse;
+	}
+	public void setSpouse(String spouse) {
+		this.spouse = spouse;
+	}
+
 	
 	
 //	public boolean yearExpVerify(String yrExp) {

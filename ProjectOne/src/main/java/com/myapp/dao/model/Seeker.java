@@ -2,31 +2,44 @@ package com.myapp.dao.model;
 
 public class Seeker extends Member{
 
-	private String noOfChildren;
-	private String spouse;
-	public Seeker(String fname, String lname, int phone, String email,
-			String noOfChildren, String spouse, String addr, String password, int memberId, Type type, Status status) {
+	private int totalChildren;
+	private String spouseName;
+	private int memberId;
+	
+	
+	public Seeker(int id, String fname, String lname, int phone, String email, String addr, String password,
+			Type type, int totalChildren, String spouseName) {
+		super(fname, lname, phone, email, addr, password, type);
+		memberId = id;
+		this.totalChildren = totalChildren;
+		this.spouseName = spouseName;
 		
-		super(fname, lname, phone, email,  addr, password, memberId, type, status);
-		this.noOfChildren = noOfChildren;
-		this.spouse = spouse;
+	}
+	public Seeker(String fname, String lname, int phone, String email, String addr, String password, Type type,  int totalChildren, String spouseName) {
+		super(fname, lname, phone, email, addr, password, type);
+		this.totalChildren = totalChildren;
+		this.spouseName = spouseName;
 	}
 	
-	public Seeker() {
-		super();
-	}
+	public Seeker() { }
 	
-	public String getNoOfChildren() {
-		return noOfChildren;
+	public int getTotalChildren() {
+		return totalChildren;
 	}
-	public void setNoOfChildren(String noOfChildren) {
-		this.noOfChildren = noOfChildren;
+	public void setTotalChildren(int totalChildren) {
+		this.totalChildren = totalChildren;
 	}
-	public String getSpouse() {
-		return spouse;
+	public int getMemberId() {
+		return memberId;
 	}
-	public void setSpouse(String spouse) {
-		this.spouse = spouse;
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
+	public String getSpouseName() {
+		return spouseName;
+	}
+	public void setSpouse(String spouseName) {
+		this.spouseName = spouseName;
 	}
 	
 }

@@ -9,12 +9,13 @@ import java.sql.Statement;
 import com.myapp.dao.model.Member;
 import com.myapp.dao.model.Member.Status;
 import com.myapp.dao.model.Member.Type;
+import com.myapp.util.ConnectionUtil;
 
 public class MemberDao implements MemberDaoInterf{
 
 	@Override
 	public Member getMember(int id) {
-		Connection conn = Conn.getConnection();
+		Connection conn = ConnectionUtil.getConnection();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("Select * from member Where id="+id);
@@ -33,6 +34,10 @@ public class MemberDao implements MemberDaoInterf{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+		      if (conn != null) 
+		        try {conn.close();} catch (SQLException e) {}
+		      }
 		
 		return null;
 	}
@@ -40,9 +45,9 @@ public class MemberDao implements MemberDaoInterf{
 	@Override
 	public boolean checkEmail(String email) {
 		
-		Connection con = Conn.getConnection();
+		Connection conn = ConnectionUtil.getConnection();
 		try {
-			Statement stmt = con.createStatement();
+			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM member WHERE email='"+email+"'");
 			if(rs.first()) {
 				return true;
@@ -51,18 +56,22 @@ public class MemberDao implements MemberDaoInterf{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+		      if (conn != null) 
+		        try {conn.close();} catch (SQLException e) {}
+		      }
 		return false;
 	}
 
 	@Override
 	public Member checkUserCredential(String email, String password) {
-		Connection con = Conn.getConnection();
+		Connection conn = ConnectionUtil.getConnection();
 		Member mem = new Member();
 		try {
-			Statement stmt = con.createStatement();
+			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM member WHERE email="+email+" AND password="+password);
 			if(rs.next()) {
-				mem.setMemberId(rs.getInt("id"));
+				mem.setId(rs.getInt("id"));
 				mem.setFname(rs.getString("fname"));
 				mem.setLname(rs.getString("lname"));
 				mem.setPhone(rs.getInt("phone"));
@@ -77,13 +86,16 @@ public class MemberDao implements MemberDaoInterf{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally {
+		      if (conn != null) 
+			        try {conn.close();} catch (SQLException e) {}
+			      }
 		return null;
 	}
 
 	@Override
 	public int insertMember(Member mem) {
-		Connection conn = Conn.getConnection();
+		Connection conn = ConnectionUtil.getConnection();
 		try {
 			String sql = "INSERT INTO member (fname,lname,phone,email,type,"
 					+ "address,password,status) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -107,13 +119,16 @@ public class MemberDao implements MemberDaoInterf{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+		      if (conn != null) 
+		        try {conn.close();} catch (SQLException e) {}
+		      }
 		return 0;
 	}
 
 	@Override
 	public boolean updateMember(Member mem) {
-		Connection conn = Conn.getConnection();
+		Connection conn = ConnectionUtil.getConnection();
 		
 		PreparedStatement ps;
 		try {
@@ -127,7 +142,7 @@ public class MemberDao implements MemberDaoInterf{
 			ps.setString(6, mem.getAddr());
 			ps.setString(8, mem.getpassword());
 			ps.setString(9, mem.getStatus().toString());
-			ps.setInt(10, mem.getMemberId());
+			ps.setInt(10, mem.getId());
 			
 			int i = ps.executeUpdate();
 			if(i==1) {
@@ -136,23 +151,29 @@ public class MemberDao implements MemberDaoInterf{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+		      if (conn != null) 
+		        try {conn.close();} catch (SQLException e) {}
+		      }
 		return false;
 	}
 
-	@Override
-	public boolean deleteMember(int id) {
-		Connection conn = Conn.getConnection();
-		try {
-			Statement stmt = conn.createStatement();
-			int i = stmt.executeUpdate("DELETE FROM member WHERE id="+id);
-			if(i==1) {
-				return true;
-			}
-		} catch (SQLException e) {	
-			e.printStackTrace();
-		}
-		return false;
-	}
+//	@Override
+//	public boolean deleteMember(int id) {
+//		Connection conn = ConnectionUtil.getConnection();
+//		try {
+//			Statement stmt = conn.createStatement();
+//			int i = stmt.executeUpdate("DELETE FROM member WHERE id="+id);
+//			if(i==1) {
+//				return true;
+//			}
+//		} catch (SQLException e) {	
+//			e.printStackTrace();
+//		}finally {
+//		      if (conn != null) 
+//			        try {conn.close();} catch (SQLException e) {}
+//			      }
+//		return false;
+//	}
 
 }

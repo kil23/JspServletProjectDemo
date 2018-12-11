@@ -9,5 +9,5 @@ public interface MemberDaoInterf {
 	Member checkUserCredential(String email, String password);
 	int insertMember(Member mem);
 	boolean updateMember(Member mem);
-	boolean deleteMember(int id);
+	//boolean deleteMember(int id);
 }

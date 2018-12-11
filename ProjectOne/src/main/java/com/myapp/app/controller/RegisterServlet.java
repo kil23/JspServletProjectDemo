@@ -13,6 +13,7 @@ import com.myapp.app.form.Registerform;
 import com.myapp.dao.model.Member;
 import com.myapp.dao.model.Member.Type;
 import com.myapp.service.MemberService;
+import com.myapp.util.RegisterUtil;
 
 
 public class RegisterServlet extends HttpServlet {
@@ -30,12 +31,13 @@ public class RegisterServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", mem);
 			session.setAttribute("username", mem.getFname());
+			session.setAttribute("id", mem.getId());
 			Type type = MemberService.checkType(mem);
 			if(type==Type.valueOf("Seeker")) {
-				response.sendRedirect("/seeker/homepage.jsp");
+				response.sendRedirect("/ProjectOne/jsp/seeker/homepage.jsp");
 			}
 			else {
-				response.sendRedirect("/sitter/homepage.jsp");
+				response.sendRedirect("/ProjectOne/jsp/sitter/homepage.jsp");
 			}
 		}else {
 			request.setAttribute("errorsReg", errorRegMap);

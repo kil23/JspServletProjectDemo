@@ -1,18 +1,16 @@
 package com.myapp.dao.model;
 
-import com.myapp.dao.model.Member.Status;
-
 public class JobApplication {
 
 	private int jobApplicationId;
 	private int jobid;
 	private int memberid;
-	private int expectedPay;
+	private double expectedPay;
 	private Status status;
 	
 	public enum Status{ Active, Inactive}
 	
-	public JobApplication(int jobApplicationId, int jobid, int memberid, int expectedPay, Status status) {
+	public JobApplication(int jobApplicationId, int jobid, int memberid, double expectedPay, Status status) {
 		super();
 		this.jobApplicationId = jobApplicationId;
 		this.jobid = jobid;
@@ -41,10 +39,10 @@ public class JobApplication {
 	public void setMemberid(int memberid) {
 		this.memberid = memberid;
 	}
-	public int getExpectedPay() {
+	public double getExpectedPay() {
 		return expectedPay;
 	}
-	public void setExpectedPay(int expectedPay) {
+	public void setExpectedPay(double expectedPay) {
 		this.expectedPay = expectedPay;
 	}
 	public Status getStatus() {

@@ -8,7 +8,7 @@ public class Member {
 	private String email;
 	private String addr;
 	private String password;
-	private int memberId;	
+	private int id;	
 	private Type type;
 	private Status status;
 
@@ -16,17 +16,39 @@ public class Member {
 	
 	public enum Status{ Active, Inactive}
 	
-	public Member(String fname, String lname, int phone, String email, String addr, String password, int memberId, Type type, Status status) {
+	public Member(int id, String fname, String lname, int phone, String email, String addr, String password, Type type, Status status) {
 		
+		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
 		this.phone = phone;
 		this.email = email;
 		this.addr = addr;
 		this.password = password;
-		this.memberId = memberId;
 		this.type = type;	
 		this.status = status;
+	}
+	
+public Member(int id, String fname, String lname, int phone, String email, String addr, String password, Type type) {
+		
+		this.id = id;
+		this.fname = fname;
+		this.lname = lname;
+		this.phone = phone;
+		this.email = email;
+		this.addr = addr;
+		this.password = password;
+		this.type = type;	
+	}
+	
+	public Member( String fname, String lname, int phone, String email, String addr, String password, Type type) {
+		this.fname = fname;
+		this.lname = lname;
+		this.phone = phone;
+		this.email = email;
+		this.addr = addr;
+		this.password = password;
+		this.type = type;
 	}
 	
 	public Member() { }
@@ -67,11 +89,11 @@ public class Member {
 	public void setpassword(String password) {
 		this.password = password;
 	}
-	public int getMemberId() {
-		return memberId;
+	public int getId() {
+		return id;
 	}
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Type getType() {
 		return type;

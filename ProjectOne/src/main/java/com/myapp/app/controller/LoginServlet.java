@@ -13,6 +13,7 @@ import com.myapp.app.form.Loginform;
 import com.myapp.dao.model.Member;
 import com.myapp.dao.model.Member.Type;
 import com.myapp.service.MemberService;
+import com.myapp.util.LoginUtil;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

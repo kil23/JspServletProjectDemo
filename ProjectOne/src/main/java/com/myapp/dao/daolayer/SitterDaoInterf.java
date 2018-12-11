@@ -5,7 +5,7 @@ import com.myapp.dao.model.Sitter;
 public interface SitterDaoInterf {
 	
 	Sitter getSitter(int id);
-	boolean insertSitter(Sitter st);
+	int insertSitter(Sitter st);
 	boolean updateSitter(Sitter st);
-	boolean deleteSitter(int id);
+	//boolean deleteSitter(int id);
 }

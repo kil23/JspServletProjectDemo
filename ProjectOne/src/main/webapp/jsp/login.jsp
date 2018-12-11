@@ -10,17 +10,22 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/visitor/login.do" method="post">
-		<pre>
-		Login Credentials:
-		
-		Email: <input type="text" name="email"  value="${param.email}"> ${errorsLogin['emailError']}
-		
-		Password: <input type="password" name="password" value="${param.password}"> ${errorsLogin['passwordError']}
-		
+		<h3>Login Credentials:</h3>
+		<table style="with: 50%">
+		<tr>
+		<td>E-mail </td> 
+		<td> <input type="text" name="email"  value="${param.email}"> ${errorsLogin['emailError']} </td>
+		</tr>
+		<tr>
+		<td> Password  </td>
+		<td> <input type="password" name="password" value="${param.password}"> ${errorsLogin['passwordError']} </td>
+		</tr>
+		<tr>
+		<td> <input type="checkbox" name="rememberMe"> Remember Me </td>
+		</tr> 
+		<tr> <td>${errorsLogin['loginError']} </td> </tr>
+		</table>
 		<input type="submit" value="Login">
-		<input type="checkbox" name="rememberMe"> Remember Me 
-		${errorsLogin['loginError']}
-		</pre>
 	</form>
 </body>
 </html>

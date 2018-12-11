@@ -2,30 +2,45 @@ package com.myapp.dao.model;
 
 public class Sitter extends Member {
 
-	private String yrExp;
-	private String epay;
-	public Sitter(String fname, String lname, int phone, String email,String yrExp, String epay, String addr, 
-			String password, int memberId, Type type, Status status) {
-		super(fname, lname, phone, email, addr, password, memberId, type, status);
-		this.yrExp = yrExp;
-		this.epay = epay;
-	}
+	private int yrExp;
+	private int epay;
+	private int memberId;
 	
+	public Sitter(int id, String fname, String lname, int phone, String email, String addr, String password,
+			Type type, int epay, int yrExp) {
+		super(fname, lname, phone, email, addr, password, type);
+		memberId = id;
+		this.epay = epay;
+		this.yrExp = yrExp;
+		
+	}
+
+	public Sitter(String fname, String lname, int phone, String email, String addr, String password, Type type, int epay, int yrExp) {
+		super(fname, lname, phone, email, addr, password, type);
+		this.epay = epay;
+		this.yrExp = yrExp;
+	}
+
 	public Sitter() {
 		super();
 	}
 	
-	public String getYrExp() {
+	public int getYrExp() {
 		return yrExp;
 	}
-	public void setYrExp(String yrExp) {
+	public void setYrExp(int yrExp) {
 		this.yrExp = yrExp;
 	}
-	public String getEpay() {
+	public int getEpay() {
 		return epay;
 	}
-	public void setEpay(String epay) {
+	public void setEpay(int epay) {
 		this.epay = epay;
 	}
-
+	public int getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
 }

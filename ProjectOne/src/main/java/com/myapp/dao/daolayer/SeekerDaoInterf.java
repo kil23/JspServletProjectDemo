@@ -5,7 +5,7 @@ import com.myapp.dao.model.Seeker;
 public interface SeekerDaoInterf {
 
 	Seeker getSeeker(int id);
-	boolean insertSeeker(Seeker sk);
+	int insertSeeker(Seeker sk);
 	boolean updateSeeker(Seeker sk);
-	boolean deleteSeeker(int id);
+	//boolean deleteSeeker(int id);
 }
