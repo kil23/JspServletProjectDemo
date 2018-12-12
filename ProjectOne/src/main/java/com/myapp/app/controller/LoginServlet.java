@@ -5,9 +5,11 @@ import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.myapp.app.form.Loginform;
 import com.myapp.dao.model.Member;
@@ -26,8 +28,23 @@ public class LoginServlet extends HttpServlet {
 		
 		if(errorLoginMap.isEmpty()) {
 			String email = loginform.getEmail();
-			String password = loginform.getPassword();
+			String password = loginform.getPassword();		
+			
 			Member member = MemberService.existingUserCheck(email, password);
+			
+			if (request.getParameter("remember") != null) {
+				String remember = request.getParameter("remember");
+				Cookie cookieUser = new Cookie("cookuser", email.trim());
+				Cookie cookieRemember = new Cookie("cookrem", remember.trim());
+				cookieUser.setMaxAge(60 * 60 * 24 * 15);
+				cookieRemember.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(cookieUser);
+				response.addCookie(cookieRemember);
+		    } 
+			
+			HttpSession httpSession = request.getSession();
+	        httpSession.setAttribute("user", email.trim());
+			
 			if(member != null) {
 				Type type = member.getType();
 				if(type == Type.valueOf("Sitter")) {

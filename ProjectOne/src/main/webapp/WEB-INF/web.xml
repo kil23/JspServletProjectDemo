@@ -4,6 +4,26 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>ConnectionSessionFilter</filter-name>
+  	<display-name>ConnectionSessionFilter</display-name>
+  	<description></description>
+  	<filter-class>com.myapp.app.filter.ConnectionSessionFilter</filter-class>
+  </filter>
+  <filter>
+  	<filter-name>MemberTypeAccessFilter</filter-name>
+  	<display-name>MemberTypeAccessFilter</display-name>
+  	<description></description>
+  	<filter-class>com.myapp.filter.MemberTypeAccessFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>ConnectionSessionFilter</filter-name>
+  	<url-pattern>/ConnectionSessionFilter</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>MemberTypeAccessFilter</filter-name>
+  	<url-pattern>/MemberTypeAccessFilter</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -20,6 +40,12 @@
   	<description></description>
   	<servlet-class>com.myapp.app.controller.CloseAccountServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<display-name>LogoutServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.LogoutServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
@@ -33,16 +59,13 @@
   	<servlet-name>CloseAccountServlet</servlet-name>
   	<url-pattern>/CloseAccountServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
 
   <welcome-file-list>
   <welcome-file>/jsp/index.jsp</welcome-file>
   </welcome-file-list>
-  
-  <resource-ref>
-    <description>DB Connection</description>   
-    <res-ref-name>jdbc/projectonedb</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-    <res-auth>Container</res-auth>
-</resource-ref> 
   
 </web-app>

@@ -40,12 +40,12 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 		</tr>
 		<tr>
 			<td>
-				<a href="CreateCourse.jsp"> Apply to new job</a>
+				<a href="CreateCourse.jsp">Apply to new job</a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="CreateCourse.jsp">Edit Profile</a>
+				<a href="EditProfile.java">Edit Profile</a>
 			</td>
 		</tr>
 		<tr>

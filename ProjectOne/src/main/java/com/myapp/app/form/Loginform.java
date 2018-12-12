@@ -2,8 +2,8 @@ package com.myapp.app.form;
 
 import java.util.HashMap;
 
-import com.myapp.service.HashUtil;
 import com.myapp.service.MemberService;
+import com.myapp.util.HashUtil;
 
 public class Loginform {
 	

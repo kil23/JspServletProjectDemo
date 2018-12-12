@@ -67,7 +67,11 @@ public class MemberService {
 		return type;
 	}
 	
-	
+	public static Member getMemberById(int id) {
+		MemberDao dao = new MemberDao();
+		Member member = dao.getMember(id);
+		return member;
+	}
 	
 	
 	

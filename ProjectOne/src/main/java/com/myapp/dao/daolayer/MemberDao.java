@@ -9,13 +9,13 @@ import java.sql.Statement;
 import com.myapp.dao.model.Member;
 import com.myapp.dao.model.Member.Status;
 import com.myapp.dao.model.Member.Type;
-import com.myapp.util.ConnectionUtil;
+import com.myapp.util.ContextConnectionUtil;
 
 public class MemberDao implements MemberDaoInterf{
 
 	@Override
 	public Member getMember(int id) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("Select * from member Where id="+id);
@@ -45,7 +45,7 @@ public class MemberDao implements MemberDaoInterf{
 	@Override
 	public boolean checkEmail(String email) {
 		
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM member WHERE email='"+email+"'");
@@ -65,7 +65,7 @@ public class MemberDao implements MemberDaoInterf{
 
 	@Override
 	public Member checkUserCredential(String email, String password) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		Member mem = new Member();
 		try {
 			Statement stmt = conn.createStatement();
@@ -95,7 +95,7 @@ public class MemberDao implements MemberDaoInterf{
 
 	@Override
 	public int insertMember(Member mem) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		try {
 			String sql = "INSERT INTO member (fname,lname,phone,email,type,"
 					+ "address,password,status) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -128,7 +128,7 @@ public class MemberDao implements MemberDaoInterf{
 
 	@Override
 	public boolean updateMember(Member mem) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		
 		PreparedStatement ps;
 		try {
@@ -160,7 +160,7 @@ public class MemberDao implements MemberDaoInterf{
 
 //	@Override
 //	public boolean deleteMember(int id) {
-//		Connection conn = ConnectionUtil.getConnection();
+//		Connection conn = ContextConnectionUtil.getConnection();
 //		try {
 //			Statement stmt = conn.createStatement();
 //			int i = stmt.executeUpdate("DELETE FROM member WHERE id="+id);
