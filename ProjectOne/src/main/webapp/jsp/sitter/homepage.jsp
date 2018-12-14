@@ -21,13 +21,13 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
       Welcome <%= session.getAttribute("username") %>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/ProjectOne/jsp/seeker/homepage.jsp">Home</a></li>
+      <li class="active"><a href="/ProjectOne/jsp/sitter/homepage.jsp">Home</a></li>
     </ul >
     <ul class="nav navbar-nav">
     	<li><a href="/ProjectOne/jsp/profile.jsp">Profile</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-          <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+          <li><a href="${pageContext.request.contextPath}/visitor/logout" method="post"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
     </ul>
   </div>
 </nav>

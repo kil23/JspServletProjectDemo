@@ -14,7 +14,7 @@ public interface JobAppDaoInterf {
 	List<JobApplication> getUsingUseridNStatus(int userId, JobApplication.Status status);
 	boolean insertUsingJobApp(JobApplication jobApp);
 	boolean updateUsingJobApp(JobApplication jobApp);
-	boolean deleteUsingJobAppId(int jobAppId);
+	int deleteUsingJobId(int jobId);
 	int deleteUsingUserId(int userId);
 	
 }

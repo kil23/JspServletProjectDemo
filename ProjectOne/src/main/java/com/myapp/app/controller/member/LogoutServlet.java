@@ -1,4 +1,4 @@
-package com.myapp.app.controller;
+package com.myapp.app.controller.member;
 
 import java.io.IOException;
 
@@ -25,7 +25,6 @@ public class LogoutServlet extends HttpServlet {
 	    httpSession.invalidate();
 	    request.setAttribute("msg", "You have successfully logged out.");
 	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ProjectOne/jsp/index.jsp");
-	    requestDispatcher.forward(request, response);
-	  
+	    requestDispatcher.forward(request, response);  
 	}
 }

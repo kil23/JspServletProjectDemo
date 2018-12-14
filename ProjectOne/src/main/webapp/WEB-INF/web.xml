@@ -5,63 +5,137 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <filter>
-  	<filter-name>ConnectionSessionFilter</filter-name>
-  	<display-name>ConnectionSessionFilter</display-name>
-  	<description></description>
-  	<filter-class>com.myapp.app.filter.ConnectionSessionFilter</filter-class>
-  </filter>
-  <filter>
   	<filter-name>MemberTypeAccessFilter</filter-name>
   	<display-name>MemberTypeAccessFilter</display-name>
   	<description></description>
   	<filter-class>com.myapp.filter.MemberTypeAccessFilter</filter-class>
   </filter>
-  <filter-mapping>
-  	<filter-name>ConnectionSessionFilter</filter-name>
-  	<url-pattern>/ConnectionSessionFilter</url-pattern>
-  </filter-mapping>
+  
   <filter-mapping>
   	<filter-name>MemberTypeAccessFilter</filter-name>
-  	<url-pattern>/MemberTypeAccessFilter</url-pattern>
+  	<url-pattern>*.do</url-pattern>
   </filter-mapping>
+  <listener>
+  	<listener-class>com.myapp.listener.ApplicationListener</listener-class>
+  </listener>
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
-  	<servlet-class>com.myapp.app.controller.LoginServlet</servlet-class>
+  	<servlet-class>com.myapp.app.controller.visitor.LoginServlet</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>RegisterServlet</servlet-name>
   	<display-name>RegisterServlet</display-name>
-  	<servlet-class>com.myapp.app.controller.RegisterServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>CloseAccountServlet</servlet-name>
-  	<display-name>CloseAccountServlet</display-name>
-  	<description></description>
-  	<servlet-class>com.myapp.app.controller.CloseAccountServlet</servlet-class>
+  	<servlet-class>com.myapp.app.controller.visitor.RegisterServlet</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>LogoutServlet</servlet-name>
   	<display-name>LogoutServlet</display-name>
   	<description></description>
-  	<servlet-class>com.myapp.app.controller.LogoutServlet</servlet-class>
+  	<servlet-class>com.myapp.app.controller.member.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>SaveProfileServlet</servlet-name>
+  	<display-name>SaveProfileServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.seeker.SaveProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EditProfileServlet</servlet-name>
+  	<display-name>EditProfileServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.member.EditProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DeleteProfileServlet</servlet-name>
+  	<display-name>DeleteProfileServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.member.DeleteProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ViewProfileServlet</servlet-name>
+  	<display-name>ViewProfileServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.member.ViewProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EditJobServlet</servlet-name>
+  	<display-name>EditJobServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.seeker.EditJobServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DeleteJobServlet</servlet-name>
+  	<display-name>DeleteJobServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.seeker.DeleteJobServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PostJobServlet</servlet-name>
+  	<display-name>PostJobServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.seeker.PostJobServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ListSeekerJobServlet</servlet-name>
+  	<display-name>ListSeekerJobServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.seeker.ListSeekerJobServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ListSeekerJobAppServlet</servlet-name>
+  	<display-name>ListSeekerJobAppServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.seeker.ListSeekerJobAppServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
-  	<url-pattern>/visitor/login.do</url-pattern>
+  	<url-pattern>/visitor/login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>RegisterServlet</servlet-name>
-  	<url-pattern>/visitor/register.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>CloseAccountServlet</servlet-name>
-  	<url-pattern>/CloseAccountServlet</url-pattern>
+  	<url-pattern>/visitor/register</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>LogoutServlet</servlet-name>
-  	<url-pattern>/LogoutServlet</url-pattern>
+  	<url-pattern>/visitor/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SaveProfileServlet</servlet-name>
+  	<url-pattern>/saveprofile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditProfileServlet</servlet-name>
+  	<url-pattern>/editprofile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteProfileServlet</servlet-name>
+  	<url-pattern>/deleteprofile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ViewProfileServlet</servlet-name>
+  	<url-pattern>/ViewProfileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditJobServlet</servlet-name>
+  	<url-pattern>/EditJobServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteJobServlet</servlet-name>
+  	<url-pattern>/DeleteJobServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PostJobServlet</servlet-name>
+  	<url-pattern>/postjob</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ListSeekerJobServlet</servlet-name>
+  	<url-pattern>/ListSeekerJobServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ListSeekerJobAppServlet</servlet-name>
+  	<url-pattern>/ListSeekerJobAppServlet</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>

@@ -1,4 +1,4 @@
-package com.myapp.app.controller;
+package com.myapp.app.controller.visitor;
 
 import java.io.IOException;
 import java.util.HashMap;

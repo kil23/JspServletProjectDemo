@@ -10,12 +10,12 @@ import java.sql.SQLException;
 
 import com.myapp.dao.model.JobApplication;
 import com.myapp.dao.model.JobApplication.Status;
-import com.myapp.util.ConnectionUtil;
+import com.myapp.util.ContextConnectionUtil;
 
 public class JobAppDao implements JobAppDaoInterf {
 
 	public JobApplication getJobAppUsingAppId(int jobAppId) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		Statement stmt;
 		JobApplication jobApp = null;
 		try {
@@ -38,7 +38,7 @@ public class JobAppDao implements JobAppDaoInterf {
 	
 	
 	public List<JobApplication> getAppByUserIdNStatus(int userId, JobApplication.Status status) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         JobApplication jobApplication = null;
         String sql = "SELECT * FROM job_application WHERE memid=? and status=?";
@@ -62,7 +62,7 @@ public class JobAppDao implements JobAppDaoInterf {
     }
 	
 	public List<JobApplication> getAppUsingUidNnumResults(int userId, int numResults) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         String sql = "SELECT * FROM job_application WHERE memid=? LIMIT ?";
         JobApplication jobApplication = null;
@@ -85,7 +85,7 @@ public class JobAppDao implements JobAppDaoInterf {
     }
 	
 	public List<JobApplication> getUsingUserid(int userId) {
-        Connection conn = ConnectionUtil.getConnection();
+        Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         JobApplication jobApplication = null;
         String sql = "SELECT * FROM job_application WHERE memid=?";
@@ -109,7 +109,7 @@ public class JobAppDao implements JobAppDaoInterf {
     }
 	
 	public List<JobApplication> getUsingUseridNStatus(int userId, JobApplication.Status status) {
-        Connection conn = ConnectionUtil.getConnection();
+        Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         JobApplication jobApplication = null;
         String sql = "SELECT * FROM job_application WHERE member_id=? and status=?";
@@ -132,7 +132,7 @@ public class JobAppDao implements JobAppDaoInterf {
     }
 	
 	public boolean insertUsingJobApp(JobApplication jobApp) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		try {
 			 PreparedStatement ps = conn.prepareStatement("INSERT INTO jobapplication (jobid, memid, expectedpay) "
 			 		+ "VALUES ( ?, ?, ?, ?)");
@@ -164,7 +164,7 @@ public class JobAppDao implements JobAppDaoInterf {
 	}
 
 	public boolean updateUsingJobApp(JobApplication jobApp) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement("UPDATE jobapplication SET expectpay=? WHERE id=?");
 			ps.setInt(1, jobApp.getJobid());
@@ -188,27 +188,28 @@ public class JobAppDao implements JobAppDaoInterf {
 		return false;
 	}
 
-	public boolean deleteUsingJobAppId(int jobAppId) {
-		Connection conn = ConnectionUtil.getConnection();
-		 boolean isDeleted = false;
-		 String sql = "UPDATE jobApplication SET status='Inactive' WHERE id=?";
+	public int deleteUsingJobId(int jobId) {
+		Connection conn = ContextConnectionUtil.getConnection();
+		 
+		 String sql = "UPDATE jobApplication SET status='Inactive' WHERE jobid=?";
 		try (PreparedStatement stmt = conn.prepareStatement(sql)){
-			stmt.setInt(1, jobAppId);
+			stmt.setInt(1, jobId);
 			int affectedRows = stmt.executeUpdate();
 			
 			if (affectedRows == 0) {
                 throw new SQLException("Deleting job application failed, no rows affected.");
             }
-			isDeleted = true;
+			
+			return affectedRows;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return isDeleted;
+		return 0;
 	}
 	
 	public int deleteUsingUserId(int userId) {
 		
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		int rowsDeleted = -1;
 		String sql = "Update jobApplication SET status='INACTIVE' WHERE memid=?";
 		try (PreparedStatement stmt = conn.prepareStatement(sql)){

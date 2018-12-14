@@ -69,7 +69,7 @@ public class MemberDao implements MemberDaoInterf{
 		Member mem = new Member();
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM member WHERE email="+email+" AND password="+password);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM member WHERE email='"+email+"' AND password='"+password+"'");
 			if(rs.next()) {
 				mem.setId(rs.getInt("id"));
 				mem.setFname(rs.getString("fname"));
@@ -158,22 +158,25 @@ public class MemberDao implements MemberDaoInterf{
 		return false;
 	}
 
-//	@Override
-//	public boolean deleteMember(int id) {
-//		Connection conn = ContextConnectionUtil.getConnection();
-//		try {
-//			Statement stmt = conn.createStatement();
-//			int i = stmt.executeUpdate("DELETE FROM member WHERE id="+id);
-//			if(i==1) {
-//				return true;
-//			}
-//		} catch (SQLException e) {	
-//			e.printStackTrace();
-//		}finally {
-//		      if (conn != null) 
-//			        try {conn.close();} catch (SQLException e) {}
-//			      }
-//		return false;
-//	}
+	@Override
+	public boolean deleteMember(int id) {
+		boolean isDeleted = false;
 
+        Connection conn = ContextConnectionUtil.getConnection();
+        String sql = "UPDATE member SET status='INACTIVE' WHERE id=?";
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, (Integer) id);
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting user failed, no rows affected.");
+            }
+
+            isDeleted = true;
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        return isDeleted;
+	}
 }

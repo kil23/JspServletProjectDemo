@@ -10,6 +10,6 @@ public interface JobDaoInterf {
 	boolean insertJob(Job job);
 	boolean updateJob(Job job);
 	boolean deleteJob(int jobid);
-	List<?> getUserJob(int userid);
+	List<?> getUserJobs(int userid);
 	
 }

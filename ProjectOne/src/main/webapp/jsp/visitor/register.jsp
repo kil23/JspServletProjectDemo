@@ -7,19 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registration Page</title>
 <%@ page isELIgnored="false" %>
+<link type="text/css" rel="stylesheet" href="/ProjectOne/css/bootstrap.css">
+<script src="/ProjectOne/js/bootstrap.js"></script>
 <script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javascript">
-$("input[type='radio']").on('change',function(){
-	if($(this).val() == "Sitter")
-	   $('.sitter').show('slow');
-	else
-	    $('.sitter').hide();
-	});
-</script>
-
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/visitor/register.do" method="post">
+	<form action="${pageContext.request.contextPath}/visitor/register" method="post">
 		<table style="with: 50%">
 		<tr>
 		<td>First Name</td>
@@ -42,14 +35,14 @@ $("input[type='radio']").on('change',function(){
 		<td>Type </td>
 		<td><input type="radio" name="type" value="Sitter" >Sitter	<input type="radio" name="type" value="Seeker" >Seeker</td>
 		</tr>
-		<div id="textboxes1" style="display: none">
-    	 	Year of Experience: <input type="text" hidden="true" name="yearExp" class="sitter"/>
-   		 	Expected Pay: <input type="text" hidden="true" name="pay"  class="sitter"/> 	 
-		</div>
-		<div id="textboxes2" style="display: none">
-    	 	Number of Children: <input type="text" hidden="true" name="children"  class="seeker"/>
-   		 	Name of Spouse: <input type="text" hidden="true" name="spouse"  class="seeker"/> 	 
-		</div>
+		<tr>
+    	 	<td>Year of Experience: <input type="text"  name="yearExp" class="sitter"/></td>
+   		 	<td>Expected Pay: <input type="text"  name="pay"  class="sitter"/></td>
+		</tr>
+		<tr>
+    	 	<td>Number of Children: <input type="text" name="children"  class="seeker"/></td>
+   		 	<td>Name of Spouse: <input type="text" name="spouse"  class="seeker"/></td> 	 
+		</tr>
 		<tr>
 		<td>Address  </td>
 		<td> <textarea rows="2" cols="40" name="addr" ><c:out value="${param.addr}" /></textarea> ${errorsReg['addrError']} </td>

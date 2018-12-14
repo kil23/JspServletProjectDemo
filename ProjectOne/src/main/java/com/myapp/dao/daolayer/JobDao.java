@@ -10,12 +10,12 @@ import java.util.List;
 
 import com.myapp.dao.model.Job;
 import com.myapp.dao.model.JobApplication.Status;
-import com.myapp.util.ConnectionUtil;
+import com.myapp.util.ContextConnectionUtil;
 
 public class JobDao implements JobDaoInterf{
 
 	public boolean insertJob(Job job) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		String sql = "insert into job (title, postedby, startdate, enddate, payperhr) Values ( ?, ?, ?, ?, ?)";
 		try {
 				PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -48,7 +48,7 @@ public class JobDao implements JobDaoInterf{
 	}
 
 	public boolean updateJob(Job job) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		String sql = "UPDATE job SET title=?, startdate=?, enddate=?, payperhr=? WHERE jobid=?";
         try (PreparedStatement myStmt = conn.prepareStatement(sql)) {
             myStmt.setString(1, job.getTitle());
@@ -68,7 +68,7 @@ public class JobDao implements JobDaoInterf{
 	}
 
 	public boolean deleteJob(int jobid) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		boolean isDeleted = false;
  
 	    String sql = "UPDATE job SET status='Inactive' WHERE jobid=?";
@@ -89,7 +89,7 @@ public class JobDao implements JobDaoInterf{
 	}
 	
 	public Job getJob(int jobAppId) {
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
         String sql = "select * from job where jobid=?";
         Job job = null;
         try (PreparedStatement myStmt = conn.prepareStatement(sql)) {
@@ -117,7 +117,7 @@ public class JobDao implements JobDaoInterf{
 	}
 	
 	public List<Job> getUserJobs(int uid){
-		Connection conn = ConnectionUtil.getConnection();
+		Connection conn = ContextConnectionUtil.getConnection();
 		List<Job> resultList = new LinkedList<>();
 
         String sql = "SELECT * FROM job WHERE postedby=?";
@@ -131,33 +131,6 @@ public class JobDao implements JobDaoInterf{
                     job.setPostedBy(myRs.getInt("postedby"));
                     job.setStartDate(myRs.getTimestamp("startdate"));
                     job.setEndDate(myRs.getTimestamp("enddate"));
-                    job.setPayPerHr(myRs.getDouble("payperhr"));
-                    job.setStatus(Status.valueOf(myRs.getString("status")));
-                    resultList.add(job);
-                }
-            }
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-        return resultList;
-	}
-
-	@Override
-	public List<Job> getUserJob(int uid) {
-		Connection conn = ConnectionUtil.getConnection();
-		List<Job> resultList = new LinkedList<>();
-
-        String sql = "SELECT * FROM job WHERE postedby=?";
-        try (PreparedStatement myStmt = conn.prepareStatement(sql)) {
-            myStmt.setInt(1, uid);
-            try (ResultSet myRs = myStmt.executeQuery()) {
-                while (myRs.next()) {
-                	Job job = new Job();
-                	job.setJobid(myRs.getInt("jobid"));
-                    job.setTitle(myRs.getString("title"));
-                    job.setPostedBy(myRs.getInt("posted_by"));
-                    job.setStartDate(myRs.getTimestamp("start_date"));
-                    job.setEndDate(myRs.getTimestamp("end_date"));
                     job.setPayPerHr(myRs.getDouble("payperhr"));
                     job.setStatus(Status.valueOf(myRs.getString("status")));
                     resultList.add(job);

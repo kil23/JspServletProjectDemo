@@ -8,9 +8,9 @@ import java.sql.Statement;
 
 import com.myapp.dao.model.Member.Status;
 import com.myapp.dao.model.Sitter;
-import com.myapp.util.ConnectionUtil;
+import com.myapp.util.ContextConnectionUtil;
 
-public class SitterDao implements SitterDaoInterf {
+public class SitterDao extends MemberDao implements SitterDaoInterf {
 
 	public Sitter getSitter(int id) {
 		Connection conn = null;
@@ -18,10 +18,10 @@ public class SitterDao implements SitterDaoInterf {
 		Statement stmt;
 		try {
 			if(conn == null || conn.isClosed()) {
-				conn = ConnectionUtil.getConnection();
+				conn = ContextConnectionUtil.getConnection();
 			}
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM sitter WHERE memberid="+id);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM sitter WHERE memberid='"+id+"'");
 			if(rs.next()) {
 				Sitter st = new Sitter();
 				st.setYrExp(rs.getInt("yrexp"));
@@ -38,31 +38,30 @@ public class SitterDao implements SitterDaoInterf {
 		return null;
 	}
 
-	public int insertSitter(Sitter st) {
+	public boolean insertSitter(Sitter st) {
 		Connection conn = null;
 		try {
 			if(conn == null || conn.isClosed()) {
-				conn = ConnectionUtil.getConnection();
+				conn = ContextConnectionUtil.getConnection();
 			}
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO sitter (yrexp,expectedpay) "
-					+ "VALUES ( ?, ?)",Statement.RETURN_GENERATED_KEYS);
-			ps.setInt(1, st.getYrExp());
-			ps.setInt(2, st.getEpay());
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO sitter (memberid,yrexp,expectedpay) "
+					+ "VALUES (?, ?, ?)",Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, st.getMemberId());
+			ps.setInt(2, st.getYrExp());
+			ps.setInt(3, st.getEpay());
 			
-			int i = ps.executeUpdate();
-			
-			if(i==1) {
-				 ResultSet rs = ps.getGeneratedKeys();
-				    rs.next();
-				   return rs.getInt(1);
+			int affectedRow = ps.executeUpdate();
+			if(affectedRow == 1) {
+				return true;
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 		      if (conn != null) 
 			        try {conn.close();} catch (SQLException e) {}
 			      }
-		return 0;
+		return false;
 	}
 
 	public boolean updateSitter(Sitter st) {
@@ -70,7 +69,7 @@ public class SitterDao implements SitterDaoInterf {
 		
 		try {
 			if(conn == null || conn.isClosed()) {
-				conn = ConnectionUtil.getConnection();
+				conn = ContextConnectionUtil.getConnection();
 			}
 			PreparedStatement ps = conn.prepareStatement("UPDATE sitter SET yrexp=?, expectedpay=? WHERE memberid=?");
 			ps.setInt(1, st.getYrExp());
@@ -88,6 +87,11 @@ public class SitterDao implements SitterDaoInterf {
 			        try {conn.close();} catch (SQLException e) {}
 			      }
 		return false;
+	}
+
+	@Override
+	public boolean deleteSitter(int id) {
+		return super.deleteMember(id);
 	}
 
 }

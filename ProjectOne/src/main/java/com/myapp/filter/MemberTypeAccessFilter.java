@@ -25,20 +25,20 @@ public class MemberTypeAccessFilter implements Filter {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		RequestDispatcher dispatcher;
 		boolean hasErrors = false;
-		if(httpServletRequest.getRequestURI().contains("/visitor")) {
-			hasErrors = ContextConnectionUtil.get().getMember()==null;
+		if(httpServletRequest.getRequestURI().contains("/visitor/")) {
+			hasErrors = httpServletRequest.getSession() != null;
 			if(hasErrors) {
 				dispatcher = request.getRequestDispatcher("/ProjectOne/jsp/visitor/index.jsp");
 				dispatcher.forward(request, response);
 			}
-		}else if(httpServletRequest.getRequestURI().contains("/seeker")) {
+		}else if(httpServletRequest.getRequestURI().contains("/seeker/")) {
 			Member member = ContextConnectionUtil.get().getMember();
 			hasErrors = member == null || member.getType() != Member.Type.Seeker;
 			if(hasErrors) {
 				dispatcher = request.getRequestDispatcher("/ProjectOne/jsp/seeker/homepage.jsp");
 				dispatcher.forward(request, response);
 			}
-		}else if(httpServletRequest.getRequestURI().contains("/sitter")) {
+		}else if(httpServletRequest.getRequestURI().contains("/sitter/")) {
 			Member member = ContextConnectionUtil.get().getMember();
 			hasErrors = member == null || member.getType() != Member.Type.Sitter;
 			if(hasErrors) {

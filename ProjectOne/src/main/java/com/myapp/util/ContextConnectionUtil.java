@@ -1,13 +1,11 @@
 package com.myapp.util;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import com.myapp.dao.model.Member;
@@ -18,7 +16,6 @@ public class ContextConnectionUtil {
 	public static ThreadLocal<ContextConnectionUtil> threadLocal = new ThreadLocal<>();
 	private HttpServletRequest request;
 	private static Connection connection;
-	private static DataSource datasource;
 	
 	public static void create(HttpServletRequest httpServletRequest) {
 		if(threadLocal != null) {
@@ -27,12 +24,6 @@ public class ContextConnectionUtil {
 		ContextConnectionUtil connectionUtil = new ContextConnectionUtil();
 		threadLocal.set(connectionUtil);
 		connectionUtil.request = httpServletRequest;
-		
-		try {
-			ContextConnectionUtil.connection = datasource.getConnection();
-		} catch (SQLException e) {
-			throw new RuntimeException("Failed to open JDBC connection", e);
-		}
 	}
 	
 	public static void destroy() {
@@ -55,23 +46,24 @@ public class ContextConnectionUtil {
 	}
 	
 	public Member getMember() {
-        Integer memberId = (Integer) request.getSession().getAttribute("UserId");
-        if (memberId != null) {
-            return MemberService.getMemberById(memberId);
+        HttpSession session =  request.getSession(false);
+        if(session != null) {
+        	Integer memberid = (Integer) session.getAttribute("id");
+        	 if (memberid != null) {
+                 return MemberService.getMemberById(memberid);
+             }
         }
         return null;
     }
 	
 	public static Connection getConnection() {
-		Context ctx = null;
 		try {
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/projectonedb");
-			connection = ds.getConnection();
-			
-		}catch (NamingException e) {
-			e.printStackTrace();
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectonedb"
+                    ,"root","root123");	
 		}catch (SQLException e) {
+			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return connection;

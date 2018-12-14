@@ -2,12 +2,12 @@ package com.myapp.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.myapp.app.form.Registerform;
+import com.myapp.app.form.Profileform;
 import com.myapp.dao.model.Member.Type;
 
 public class RegisterUtil {
 
-	public Registerform getValues(HttpServletRequest request) {
+	public Profileform getValues(HttpServletRequest request) {
 		
 		String fname = request.getParameter("fname");
 		String lname = request.getParameter("lname");
@@ -22,6 +22,6 @@ public class RegisterUtil {
 		String noChild = request.getParameter("children");
 		String spouse = request.getParameter("spouse");
 		
-		return new Registerform(fname, lname, phone, type, email, addr, password, cpassword, yrExp, epay, noChild, spouse);
+		return new Profileform(fname, lname, phone, type, email, addr, password, cpassword, yrExp, epay, noChild, spouse);
 	}
 }

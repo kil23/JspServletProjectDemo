@@ -6,9 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <link type="text/css" rel="stylesheet" href="/ProjectOne/css/bootstrap.css">
+<script src="/ProjectOne/js/bootstrap.js"></script>
 <title>Login Page</title>
 </head>
-<body>
+<body id="LoginForm">
 <%
     Cookie[] cookies=request.getCookies();
     String userName = "",rememberVal="";
@@ -23,24 +25,41 @@
         }
     }
 %>
-	<form action="${pageContext.request.contextPath}/visitor/login.do" method="post">
-		<h3>Login Credentials:</h3>
-		<table style="with: 50%">
-		<tr>
-		<td>E-mail </td> 
-		<td> <input type="text" name="email"  value="${param.email}"> ${errorsLogin['emailError']} </td>
-		</tr>
-		<tr>
-		<td> Password  </td>
-		<td> <input type="password" name="password" value="${param.password}"> ${errorsLogin['passwordError']} </td>
-		</tr>
-		<tr>
-		<td> <input type="checkbox" name="rememberMe" value="1"> 
-		Remember Me </td>
-		</tr> 
-		<tr> <td>${errorsLogin['loginError']} </td> </tr>
-		</table>
-		<input type="submit" value="Login">
+	<form action="${pageContext.request.contextPath}/visitor/login" method="post">
+		 <div class="container"  >
+        <div class="row">
+            <div class="col-md-3 "></div>
+                <div class="col-md-6  col-xs-12">
+                    <div class="jumbotron">
+                        <h1 class="text-center">Login Page</h1>
+                        <br>
+                        <div class="form-group">
+                           <label for="email">Email address:</label>
+							<input type="text" name="email" class="form-control " value="${param.email}"> 
+		  					<label class="text-danger">${errorsLogin['emailError']}</label>  
+                        </div>
+                        <span class="glyphicon glyphicon-search"></span>aasd
+                        <br>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+		   					<input type="password" name="password" class="form-control " value="${param.password}"> 
+		  					<label class="text-danger">${errorsLogin['passwordError']}</label> 
+                        </div>
+                        <div class="forgot">
+						 	<a href="#" name="forgotPassword"> Forgot Password?</a>
+						</div>
+						<div class="remember">
+						  	<input type="checkbox" name="rememberMe" value="1"> Remember Me  
+						 </div>
+						   <label class="text-danger">${errorsLogin['loginError']}</label>    
+						<div style="text-align:center">
+							<input type="submit" class="btn btn-primary  btn-md btn-block" value="Login">
+						</div>
+                    </div>
+                </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
 	</form>
 </body>
 </html>
