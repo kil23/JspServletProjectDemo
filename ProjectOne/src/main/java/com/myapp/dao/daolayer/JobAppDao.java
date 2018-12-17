@@ -14,30 +14,39 @@ import com.myapp.util.ContextConnectionUtil;
 
 public class JobAppDao implements JobAppDaoInterf {
 
-	public JobApplication getJobAppUsingAppId(int jobAppId) {
+	public List<JobApplication> getJobAppListByJobId(int jobId) {
 		Connection conn = ContextConnectionUtil.getConnection();
 		Statement stmt;
+		List<JobApplication> resultList = new LinkedList<>();
 		JobApplication jobApp = null;
 		try {
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM jobapplication WHERE id="+jobAppId);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM jobapplication WHERE id='"+jobId+"'");
 			if(rs.next()) {
 				jobApp = new JobApplication();
 				jobApp.setJobApplicationId(rs.getInt("id"));
-				jobApp.setJobid(rs.getInt("jobid"));
+				jobApp.setJobid(jobId);
 				jobApp.setMemberid(rs.getInt("memid"));
 				jobApp.setExpectedPay(rs.getDouble("expectedpay"));
+				jobApp.setStatus(Status.valueOf(rs.getString("status")));
+				resultList.add(jobApp);
+				return resultList;
 			}else {
                 throw new SQLException("Job not found.");
             }
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		return jobApp;
+		}finally {
+			if (conn != null) 
+		        try {
+		        		conn.close();
+		        }catch (SQLException e) {}
+		      }
+		return null;
+		
 	}
 	
-	
-	public List<JobApplication> getAppByUserIdNStatus(int userId, JobApplication.Status status) {
+	public List<JobApplication> getJobAppListByUserIdNStatus(int userId, JobApplication.Status status) {
 		Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         JobApplication jobApplication = null;
@@ -61,7 +70,7 @@ public class JobAppDao implements JobAppDaoInterf {
         return resultList;
     }
 	
-	public List<JobApplication> getAppUsingUidNnumResults(int userId, int numResults) {
+	public List<JobApplication> getJobAppListUsingUidNnumResults(int userId, int numResults) {
 		Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         String sql = "SELECT * FROM job_application WHERE memid=? LIMIT ?";
@@ -84,7 +93,7 @@ public class JobAppDao implements JobAppDaoInterf {
         return resultList;
     }
 	
-	public List<JobApplication> getUsingUserid(int userId) {
+	public List<JobApplication> getJobAppListUsingUserid(int userId) {
         Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         JobApplication jobApplication = null;
@@ -108,7 +117,7 @@ public class JobAppDao implements JobAppDaoInterf {
         return resultList;
     }
 	
-	public List<JobApplication> getUsingUseridNStatus(int userId, JobApplication.Status status) {
+	public List<JobApplication> getJobAppListUsingUseridNStatus(int userId, JobApplication.Status status) {
         Connection conn = ContextConnectionUtil.getConnection();
         List<JobApplication> resultList = new LinkedList<>();
         JobApplication jobApplication = null;

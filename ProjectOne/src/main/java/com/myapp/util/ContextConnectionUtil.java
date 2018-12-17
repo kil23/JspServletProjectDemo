@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
@@ -57,15 +60,25 @@ public class ContextConnectionUtil {
     }
 	
 	public static Connection getConnection() {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectonedb"
-                    ,"root","root123");	
+		Context ctx = null;
+		Connection conn = null;
+	try {
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/projectonedb");
+			conn = ds.getConnection();
+//			try {
+//				Class.forName("com.mysql.cj.jdbc.Driver");
+//			} catch (ClassNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectonedb"
+//                    ,"root","root123");	
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}catch (ClassNotFoundException e) {
+		}catch (NamingException e) {
 			e.printStackTrace();
 		}
-		return connection;
+		return conn;
 	}
 }

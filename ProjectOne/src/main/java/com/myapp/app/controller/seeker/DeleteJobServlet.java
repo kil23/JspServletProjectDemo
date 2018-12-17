@@ -15,7 +15,7 @@ public class DeleteJobServlet extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userid = ContextConnectionUtil.get().getMember().getId();
-		
+		 
 		
 	}
 }

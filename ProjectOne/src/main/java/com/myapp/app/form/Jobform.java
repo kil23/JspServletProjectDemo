@@ -2,6 +2,8 @@ package com.myapp.app.form;
 
 import java.util.HashMap;
 
+import com.myapp.dao.model.JobApplication.Status;
+
 public class Jobform {
 
 	private int jobid;
@@ -10,21 +12,24 @@ public class Jobform {
     private String startDate;
 	private String endDate;
     private String payPerHr;
+    private Status status;
     
-    public Jobform(String title, int postedBy, String startDate, String endDate, String payPerHr) {
+    public Jobform(String title, int postedBy, String startDate, String endDate, Status status, String payPerHr) {
         this.title = title;
         this.postedBy = postedBy;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.setStatus(status);
         this.payPerHr = payPerHr;
     }
     
-    public Jobform(int jobid, String title, int postedBy, String startDate, String endDate, String payPerHr) {
+    public Jobform(int jobid, String title, int postedBy, String startDate, String endDate, Status status, String payPerHr) {
     	this.jobid = jobid;
     	this.title = title;
         this.postedBy = postedBy;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.setStatus(status);
         this.payPerHr = payPerHr;
     }
     
@@ -72,6 +77,12 @@ public class Jobform {
 	}
 	public void setPayPerHr(String payPerHr) {
 		this.payPerHr = payPerHr;
+	}
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }
