@@ -63,22 +63,22 @@ public class ContextConnectionUtil {
 		Context ctx = null;
 		Connection conn = null;
 	try {
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/projectonedb");
-			conn = ds.getConnection();
-//			try {
-//				Class.forName("com.mysql.cj.jdbc.Driver");
-//			} catch (ClassNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectonedb"
-//                    ,"root","root123");	
+//			ctx = new InitialContext();
+//			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/projectonedb");
+//			conn = ds.getConnection();
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectonedb"
+                    ,"root","root123");	
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}catch (NamingException e) {
-			e.printStackTrace();
-		}
+		}//catch (NamingException e) {
+		//	e.printStackTrace();
+		//}
 		return conn;
 	}
 }

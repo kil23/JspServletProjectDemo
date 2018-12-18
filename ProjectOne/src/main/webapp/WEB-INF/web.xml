@@ -88,6 +88,24 @@
   	<description></description>
   	<servlet-class>com.myapp.app.controller.seeker.ListSeekerJobAppServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>SeekerHomePageServlet</servlet-name>
+  	<display-name>SeekerHomePageServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.seeker.SeekerHomePageServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>SitterHomePageServlet</servlet-name>
+  	<display-name>SitterHomePageServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.sitter.SitterHomePageServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>JobApplyServlet</servlet-name>
+  	<display-name>JobApplyServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.sitter.JobApplyServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
@@ -136,6 +154,18 @@
   <servlet-mapping>
   	<servlet-name>ListSeekerJobAppServlet</servlet-name>
   	<url-pattern>/ListSeekerJobAppServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SeekerHomePageServlet</servlet-name>
+  	<url-pattern>/SeekerHomePageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SitterHomePageServlet</servlet-name>
+  	<url-pattern>/SitterHomePageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>JobApplyServlet</servlet-name>
+  	<url-pattern>/JobApplyServlet</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>

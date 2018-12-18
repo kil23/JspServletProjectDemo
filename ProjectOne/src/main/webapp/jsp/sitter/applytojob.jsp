@@ -8,13 +8,17 @@
 </head>
 <body>
 	<pre>*** Job Application ***</pre>
-	<form action="/sitter/sitter.do">
+	<form action="/sitter/sitter.do"> 
 	
-	Job_id : 
+	Title: 
 	
-	User_id :
+	Start Date:
 	
-	Expected_pay (in $ per hour) : <input type="text" name="expectpay" >
+	End Date:
+	
+	Pay per Hour: 
+	
+	Expected_pay (in $ per hour) : <input type="text" name="expectedpay" >
 	
 	<input type="submit" value="Apply">
 	</form>

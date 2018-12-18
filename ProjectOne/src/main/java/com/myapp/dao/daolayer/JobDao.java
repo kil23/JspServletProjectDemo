@@ -88,12 +88,12 @@ public class JobDao implements JobDaoInterf{
 	    return isDeleted;
 	}
 	
-	public Job getJob(int jobAppId) {
+	public Job getJob(int jobId) {
 		Connection conn = ContextConnectionUtil.getConnection();
         String sql = "select * from job where jobid=?";
         Job job = null;
         try (PreparedStatement myStmt = conn.prepareStatement(sql)) {
-            myStmt.setInt(1, jobAppId);
+            myStmt.setInt(1, jobId);
 
             try (ResultSet myRs = myStmt.executeQuery()) {
                 if (myRs.next()) {
