@@ -14,6 +14,26 @@ import com.myapp.util.ContextConnectionUtil;
 
 public class JobAppDao implements JobAppDaoInterf {
 
+	public JobApplication getJobAppByJobAppId(int jobAppid) {
+		Connection conn = ContextConnectionUtil.getConnection();
+		JobApplication jobApp = null;
+		String sql = "Select * from jobapplication Where id=?";
+		try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+			preparedStatement.setInt(1, jobAppid);
+			try(ResultSet rs = preparedStatement.executeQuery()){
+				jobApp = new JobApplication();
+				jobApp.setJobApplicationId(jobAppid);
+				jobApp.setJobid(rs.getInt("jobid"));
+				jobApp.setMemberid(rs.getInt("memid"));
+				jobApp.setExpectedPay(rs.getDouble("expectedpay"));
+				jobApp.setStatus(Status.valueOf(rs.getString("status")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return jobApp;
+	}
+	
 	public List<JobApplication> getJobAppListByJobId(int jobId) {
 		Connection conn = ContextConnectionUtil.getConnection();
 		Statement stmt;
@@ -60,7 +80,6 @@ public class JobAppDao implements JobAppDaoInterf {
                 	jobApplication.setJobApplicationId(myRs.getInt("id"));
                 	jobApplication.setJobid(myRs.getInt("jobid"));
                 	jobApplication.setExpectedPay(myRs.getDouble("expectedpay"));
-                    
                     resultList.add(jobApplication);
                 }
             }
@@ -197,6 +216,25 @@ public class JobAppDao implements JobAppDaoInterf {
 		return false;
 	}
 
+	public boolean deleteJobAppUsingJobAppId(int jobAppid) {
+		Connection conn = ContextConnectionUtil.getConnection();
+		 
+		 String sql = "UPDATE jobApplication SET status='Inactive' WHERE id=?";
+		try (PreparedStatement stmt = conn.prepareStatement(sql)){
+			stmt.setInt(1, jobAppid);
+			int affectedRows = stmt.executeUpdate();
+			if(affectedRows == 1) {
+				return true;
+			}
+			if (affectedRows == 0) {
+               throw new SQLException("Deleting job application failed, no rows affected.");
+           }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public int deleteUsingJobId(int jobId) {
 		Connection conn = ContextConnectionUtil.getConnection();
 		 

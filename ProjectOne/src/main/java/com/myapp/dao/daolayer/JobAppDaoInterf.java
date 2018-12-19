@@ -7,6 +7,7 @@ import com.myapp.dao.model.JobApplication;
 
 public interface JobAppDaoInterf {
 	
+	public JobApplication getJobAppByJobAppId(int jobAppid);
 	List<JobApplication> getJobAppListByJobId(int jobId);
 	List<JobApplication> getJobAppListByUserIdNStatus(int userId, JobApplication.Status status);
 	List<JobApplication> getJobAppListUsingUidNnumResults(int userId, int numResults);

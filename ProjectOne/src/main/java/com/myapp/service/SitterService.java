@@ -36,4 +36,16 @@ public class SitterService {
 		Job job = jobDao.getJob(jobid);
 		return job;
 	}
+	
+	public static JobApplication getJobAppUsingJobAppid(int jobAppid) {
+		JobAppDao appDao = new JobAppDao();
+		JobApplication application = appDao.getJobAppByJobAppId(jobAppid);
+		return application;
+	}
+	
+	public static boolean deleteJobApp(int JobAppid) {
+		JobAppDao jobAppDao = new JobAppDao();
+		boolean result = jobAppDao.deleteJobAppUsingJobAppId(JobAppid);
+		return result;
+	}
 }
