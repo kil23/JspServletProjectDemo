@@ -27,18 +27,21 @@ public class ListSeekerJobAppServlet extends HttpServlet {
 			Job job = SeekerService.getJobByJobid(job_id);
 			if(userid == job.getPostedBy()) {
 				String title = job.getTitle();
+				String name = SeekerService.getNameByid(userid);
+				
 				List<JobAppform> seekerJobApp = SeekerService.getJobAppByJobid(job_id);
 				request.setAttribute("jobApp", seekerJobApp);
 				request.setAttribute("jobtitle", title);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/seeker/listjobApp.jsp");
+				request.setAttribute("name", name);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/seeker/listjobapp.jsp");
 				dispatcher.forward(request, response);
 			}
 			else {
-				response.sendRedirect("/ProjectOne/jsp/seeker/job-list.do?success=false");
+				response.sendRedirect("/ProjectOne/jsp/seeker/listjob?success=false");
 			}
 		}
 		else {
-			response.sendRedirect("/ProjectOne/jsp/seeker/job-list.do?success=false");
+			response.sendRedirect("/ProjectOne/jsp/seeker/listjob?success=false");
 		}
 	}
 }

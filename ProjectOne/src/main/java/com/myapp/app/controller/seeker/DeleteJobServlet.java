@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myapp.dao.model.Job;
+import com.myapp.service.SeekerService;
 import com.myapp.util.ContextConnectionUtil;
 
 
@@ -19,14 +21,14 @@ public class DeleteJobServlet extends HttpServlet {
 		if(job_id!=null && !job_id.trim().isEmpty() && job_id.matches("^[0-9]+$")){
 			int jobid = Integer.parseInt(job_id);
 			boolean isDeleted = false;
-			Job job = SeekerService.getJobByJobid(job_id);
+			Job job = SeekerService.getJobByJobid(jobid);
 			if(userid == job.getPostedBy()){
-				isDeleted = SeekerService.deleteJob(jobid)
+				isDeleted = SeekerService.deleteJob(jobid);
 			}
 			if(isDeleted){
-				response.sendredirect("/ProjectOne/jsp/seeker/listjob?success=true");
+				response.sendRedirect("/ProjectOne/jsp/seeker/listjob?success=true");
 			}else {
-				response.sendredirect("/ProjectOne/jsp/seeker/listjob?success=false");
+				response.sendRedirect("/ProjectOne/jsp/seeker/listjob?success=false");
 			}
 		}
 		

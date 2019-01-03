@@ -6,15 +6,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.myapp.app.form.JobAppform;
 import com.myapp.app.form.Jobform;
 import com.myapp.dao.daolayer.JobAppDao;
 import com.myapp.dao.daolayer.JobDao;
+import com.myapp.dao.daolayer.MemberDao;
 import com.myapp.dao.model.Job;
 import com.myapp.dao.model.JobApplication;
 import com.myapp.dao.model.JobApplication.Status;
+import com.myapp.dao.model.Member;
 
 public class SeekerService {
 	
@@ -34,6 +35,15 @@ public class SeekerService {
 		return seekerjobs;
 	}
 	
+	public static String getNameByid(int userid) {
+		MemberDao memberDao = new MemberDao();
+		Member member = memberDao.getMember(userid);
+		String fname = member.getFname();
+		String lname = member.getLname();
+		String name = fname +" "+ lname;
+		return name;
+	}
+	
 	public static Job getJobByJobid(int jobid) {
 		JobDao jobDao = new JobDao();
 		Job job = jobDao.getJob(jobid);
@@ -45,11 +55,11 @@ public class SeekerService {
 		List<JobApplication> jobAppList = jobAppDao.getJobAppListByJobId(jobid);
 		List<JobAppform> form = new ArrayList<>();
 		for(JobApplication jobApp : jobAppList) {
-			int id = jobApp.getJobApplicationId();
-			int job_id = jobid;
-			int memberid = jobApp.getMemberid();
+			String id = String.valueOf(jobApp.getJobApplicationId());
+			String job_id = String.valueOf(jobid);
+			String memberid = String.valueOf(jobApp.getMemberid());
 			Status status = jobApp.getStatus();
-			double expectedpay = jobApp.getExpectedPay();
+			String expectedpay = String.valueOf(jobApp.getExpectedPay());
 			form.add(new JobAppform(id, job_id, memberid, expectedpay, status));
 		}
 		return form;

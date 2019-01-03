@@ -4,6 +4,8 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+  
   <filter>
   	<filter-name>MemberTypeAccessFilter</filter-name>
   	<display-name>MemberTypeAccessFilter</display-name>
@@ -15,9 +17,13 @@
   	<filter-name>MemberTypeAccessFilter</filter-name>
   	<url-pattern>*.do</url-pattern>
   </filter-mapping>
+  
+  
   <listener>
   	<listener-class>com.myapp.listener.ApplicationListener</listener-class>
   </listener>
+  
+  
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -33,12 +39,6 @@
   	<display-name>LogoutServlet</display-name>
   	<description></description>
   	<servlet-class>com.myapp.app.controller.member.LogoutServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>SaveProfileServlet</servlet-name>
-  	<display-name>SaveProfileServlet</display-name>
-  	<description></description>
-  	<servlet-class>com.myapp.app.controller.seeker.SaveProfileServlet</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>EditProfileServlet</servlet-name>
@@ -57,6 +57,12 @@
   	<display-name>ViewProfileServlet</display-name>
   	<description></description>
   	<servlet-class>com.myapp.app.controller.member.ViewProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>SaveProfileServlet</servlet-name>
+  	<display-name>SaveProfileServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.myapp.app.controller.member.SaveProfileServlet</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>EditJobServlet</servlet-name>
@@ -141,71 +147,71 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>LogoutServlet</servlet-name>
-  	<url-pattern>/visitor/logout</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>SaveProfileServlet</servlet-name>
-  	<url-pattern>/saveprofile</url-pattern>
+  	<url-pattern>/member/logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>EditProfileServlet</servlet-name>
-  	<url-pattern>/editprofile</url-pattern>
+  	<url-pattern>/member/editprofile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>DeleteProfileServlet</servlet-name>
-  	<url-pattern>/deleteprofile</url-pattern>
+  	<url-pattern>/member/deleteprofile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ViewProfileServlet</servlet-name>
-  	<url-pattern>/ViewProfileServlet</url-pattern>
+  	<url-pattern>/member/viewprofile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SaveProfileServlet</servlet-name>
+  	<url-pattern>/member/saveprofile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>EditJobServlet</servlet-name>
-  	<url-pattern>/EditJobServlet</url-pattern>
+  	<url-pattern>/seeker/editjob</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>DeleteJobServlet</servlet-name>
-  	<url-pattern>/DeleteJobServlet</url-pattern>
+  	<url-pattern>/seeker/deletejob</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>PostJobServlet</servlet-name>
-  	<url-pattern>/postjob</url-pattern>
+  	<url-pattern>/seeker/postjob</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ListSeekerJobServlet</servlet-name>
-  	<url-pattern>/joblist.do</url-pattern>
+  	<url-pattern>/seeker/joblist</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ListSeekerJobAppServlet</servlet-name>
-  	<url-pattern>/ListSeekerJobAppServlet</url-pattern>
+  	<url-pattern>/seeker/jobapplist</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>SeekerHomePageServlet</servlet-name>
-  	<url-pattern>/SeekerHomePageServlet</url-pattern>
+  	<url-pattern>/seeker/home</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>SitterHomePageServlet</servlet-name>
-  	<url-pattern>/SitterHomePageServlet</url-pattern>
+  	<url-pattern>/sitter/home</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>JobApplyServlet</servlet-name>
-  	<url-pattern>/JobApplyServlet</url-pattern>
+  	<url-pattern>/sitter/applyjob</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>DeleteJobAppServlet</servlet-name>
-  	<url-pattern>/DeleteJobAppServlet</url-pattern>
+  	<url-pattern>/sitter/deletejob</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>EditJobAppServlet</servlet-name>
-  	<url-pattern>/EditJobAppServlet</url-pattern>
+  	<url-pattern>/sitter/editjobapp</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ListJobAppServlet</servlet-name>
-  	<url-pattern>/ListJobAppServlet</url-pattern>
+  	<url-pattern>/sitter/listjobapp</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ListSitterJobsServlet</servlet-name>
-  	<url-pattern>/ListSitterJobsServlet</url-pattern>
+  	<url-pattern>/sitter/listjoblist</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>

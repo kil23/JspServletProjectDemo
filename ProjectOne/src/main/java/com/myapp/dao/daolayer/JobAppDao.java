@@ -34,6 +34,37 @@ public class JobAppDao implements JobAppDaoInterf {
 		return jobApp;
 	}
 	
+	public List<JobApplication> getJobAppListByUserid(int userid){
+		Connection conn = ContextConnectionUtil.getConnection();
+		Statement stmt;
+		List<JobApplication> resultList = new LinkedList<>();
+		JobApplication jobApp = null;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM jobapplication WHERE memid='"+userid+"'");
+			if(rs.next()) {
+				jobApp = new JobApplication();
+				jobApp.setJobApplicationId(rs.getInt("id"));
+				jobApp.setJobid(rs.getInt("id"));
+				jobApp.setMemberid(userid);
+				jobApp.setExpectedPay(rs.getDouble("expectedpay"));
+				jobApp.setStatus(Status.valueOf(rs.getString("status")));
+				resultList.add(jobApp);
+				return resultList;
+			}else {
+                throw new SQLException("Job not found.");
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (conn != null) 
+		        try {
+		        		conn.close();
+		        }catch (SQLException e) {}
+		      }
+		return null;
+	}
+		
 	public List<JobApplication> getJobAppListByJobId(int jobId) {
 		Connection conn = ContextConnectionUtil.getConnection();
 		Statement stmt;
@@ -195,10 +226,8 @@ public class JobAppDao implements JobAppDaoInterf {
 		Connection conn = ContextConnectionUtil.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement("UPDATE jobapplication SET expectpay=? WHERE id=?");
-			ps.setInt(1, jobApp.getJobid());
-			ps.setInt(2, jobApp.getMemberid());
-			ps.setDouble(3, jobApp.getExpectedPay());
-			ps.setString(4, jobApp.getStatus().toString());
+			ps.setDouble(1, jobApp.getExpectedPay());
+			ps.setInt(2, jobApp.getJobApplicationId());
 			
 			int affectedRows = ps.executeUpdate();
 			

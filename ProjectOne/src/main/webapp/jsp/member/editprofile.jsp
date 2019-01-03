@@ -10,45 +10,110 @@
 <title>Edit Profile</title>
 </head>
 <body>
-
-	<form action="${pageContext.request.contextPath}/saveprofile" method="post">
-		<table style="with: 50%">
-		<tr>
-		<td>First Name</td>
-		<td> <input type="text" name="fname" value="${sessionScope.user.fname}"> ${errorsReg['fnameError']}</td>
-		</tr>
-		<tr>
-		<td>Last Name </td>
-		<td> <input type="text" name="lname" value="${sessionScope.user.lname}"> ${errorsReg['lnameError']} </td>
-		</tr>
-		<tr>
-		<td>Phone no </td>
-		<td><input type="text" name="phone" value="${sessionScope.user.phone}"> ${errorsReg['phoneError']}</td>
-		</tr>
-		<tr>
-		<td>E-mail </td>
-		<td><input type="text" name="email" value="${sessionScope.user.email}"> ${errorsReg['emailError']}</td>
-		</tr>
-		<tr>
+<div class="container mt-10 w-20 mb-10 center-block">
+        <div id="wrapper">
+            <div id="header">
+                <h3 class="text-center mb-3">Edit Profile</h3>
+            </div>
+        </div>
+        
+	<form action="/ProjectOne/jsp/member/saveprofile" method="post">
 		
-		<td>Type </td>
-		<td><input type="radio" name="type" value="Sitter" >Sitter	<input type="radio" name="type" value="Seeker" >Seeker</td>
-		</tr>
-		<tr>
-    	 	<td>Year of Experience: <input type="text"  name="yearExp" class="sitter" value="${sessionScope.user.yrExp}"/>${errorsReg['yrExpError']}</td>
-   		 	<td>Expected Pay: <input type="text"  name="pay"  class="sitter" value="${sessionScope.user.epay}"/>${errorsReg['payError']}</td>
-		</tr>
-		<tr>
-    	 	<td>Number of Children: <input type="text" name="children"  class="seeker" value="${sessionScope.user.totalChildren}"/>${errorsReg['numChildrenError']}</td>
-   		 	<td>Name of Spouse: <input type="text" name="spouse"  class="seeker" value="${sessionScope.user.spouseName}"/>${errorsReg['spouseNameError']}</td> 	 
-		</tr>
-		<tr>
-		<td>Address  </td>
-		<td> <textarea rows="2" cols="40" name="addr" ><c:out value="${sessionScope.user.addr}" /></textarea> ${errorsReg['addrError']} </td>
-		</tr>
-		</table>
-		<input type="submit" value="Save">
-		
+		 <div class="form-group">
+            <label for="fname">First Name:</label>
+            <input type="text" class="form-control" name="firstname" id="fname" value="${sessionScope.user.fname}">
+            <c:if test="${not empty errorsReg['fnameError']}">
+                <div class="alert alert-danger">
+                   ${errorsReg['fnameError']}
+                </div>
+            </c:if>
+            </div>
+            <div class="form-group">
+            <label for="lname">Last Name:</label>
+            <input type="text" class="form-control" id="lname" name="lastname" value="${sessionScope.user.lname}" >
+            <c:if test="${not empty errorsReg['lnameError']}">
+                <div class="alert alert-danger">
+                     ${errorsReg['lnameError']}
+                </div>
+            </c:if>
+            </div>
+            <div class="form-group">
+            <label for="phone">Phone No:</label>
+            <input type="text" class="form-control" id="phone" name="phoneno" value="${sessionScope.user.phone}" >
+            <c:if test="${not empty errorsReg['phoneError']}">
+                <div class="alert alert-danger">
+                     ${errorsReg['phoneError']}
+                </div>
+            </c:if>
+            </div>
+            <div class="form-group">
+            <label for="email">Email Id:</label>
+            <input type="text" class="form-control" id="email" name="emailid" value="${sessionScope.user.email}"  readonly="readonly">
+            <c:if test="${not empty errorsReg['emailError']}">
+                <div class="alert alert-danger">
+                   ${errorsReg['emailError']}
+                </div>
+            </c:if>
+            </div>
+            
+            
+            <c:choose>
+                <c:when test="${sessionScope.MemberType == 'SITTER'}">
+                    <div class="form-group">
+                    <label for="exp">Experience:</label>
+                    <input type="text" class="form-control" id="exp" name="experience" value="${sessionScope.user.yrExp}" >
+                    <c:if test="${not empty errorsReg['yrExpError']}">
+                        <div class="alert alert-danger">
+                           ${errorsReg['yrExpError']}
+                        </div>
+                    </c:if>
+                    </div>
+                    <div class="form-group">
+                    <label for="epay">Experience:</label>
+                    <input type="text" class="form-control" id="epay" name="expectedPay" value="${sessionScope.user.epay}" >
+                    <c:if test="${not empty errorsReg['payError']}">
+                        <div class="alert alert-danger">
+                           ${errorsReg['payError']}
+                        </div>
+                    </c:if>
+                    </div>
+                </c:when>
+                <c:when test="${sessionScope.MemberType == 'SEEKER'}">
+                    <div class="form-group">
+                    <label for="totalchildren">Total Children:</label>
+                    <input type="text" class="form-control" id="totalchildren" name="totalchildren"  value="${sessionScope.user.totalChildren}" >
+                    <c:if test="${not empty errorsReg['numChildrenError']}">
+                        <div class="alert alert-danger">
+                            ${errorsReg['numChildrenError']}
+                        </div>
+                    </c:if>
+                    </div>
+                    <div class="form-group">
+                    <label for="sname">Spouse Name:</label>
+                    <input type="text" class="form-control" id="sname" name="spousename" value="${sessionScope.user.spouseName}" >
+                    <c:if test="${not empty errorsReg['spouseNameError']}">
+                        <div class="alert alert-danger">
+                            ${errorsReg['spouseNameError']}
+                        </div>
+                    </c:if>
+                    </div>
+                </c:when>
+            </c:choose>
+            
+            <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address" name="address"  value="${sessionScope.user.addr}" >
+            <c:if test="${not empty ProfileData.errors['address']}">
+                <div class="alert alert-danger">
+                   ${errorsReg['addrError']}
+                </div>
+            </c:if>
+            </div>
+            
+            <div class="input-grp" style="text-align:center">
+                <input type="submit" class="btn btn-default" value="Save"/>
+            </div>
 	</form>
+</div>
 </body>
 </html>

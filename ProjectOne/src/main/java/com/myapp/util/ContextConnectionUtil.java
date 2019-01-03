@@ -19,6 +19,7 @@ public class ContextConnectionUtil {
 	public static ThreadLocal<ContextConnectionUtil> threadLocal = new ThreadLocal<>();
 	private HttpServletRequest request;
 	private static Connection connection;
+	private static DataSource dataSource;
 	
 	public static void create(HttpServletRequest httpServletRequest) {
 		if(threadLocal != null) {
@@ -44,6 +45,18 @@ public class ContextConnectionUtil {
 		threadLocal.remove();
 	}
 	
+	 public static void initContext()
+		        throws ClassNotFoundException, SQLException, NamingException {
+		        Context initCtx = new InitialContext();
+		        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+		        // Look up our data source
+		        dataSource = (DataSource) envCtx.lookup("jdbc/projectonedb");
+		    }
+	
+	 public static void destroyContext() throws SQLException{
+	        // doing nothing for now
+	    }
+	 
 	public static ContextConnectionUtil get() {
 		return threadLocal.get();
 	}
@@ -72,7 +85,7 @@ public class ContextConnectionUtil {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectonedb"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectonedb"
                     ,"root","root123");	
 		}catch (SQLException e) {
 			e.printStackTrace();

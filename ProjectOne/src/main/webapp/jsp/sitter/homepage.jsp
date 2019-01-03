@@ -31,30 +31,31 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     </ul>
   </div>
 </nav>
-	
-	<table >
-		<tr>
-			<td>
-				<a href="CreateCourse.jsp">My Application</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="CreateCourse.jsp">Apply to new job</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="EditProfile.java">Edit Profile</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="CloseAccountServlet.java">Close Account</a>
-			</td>
-		</tr>
-		
-	</table>
+
+	<div class="container mt-5 w-25">
+        <div id="wrapper">
+            <div id="header">
+                <h3 class="text-center mb-5">Welcome to Sitter Homepage.</h3>
+            </div>
+        </div>
+
+        <c:if test="${not empty requestScope.errormsg}">
+            <div class="alert alert-danger">
+              ${requestScope.errormsg}
+            </div>
+        </c:if>
+
+        <c:if test="${not empty requestScope.resultmsg}">
+            <div class="alert alert-success">
+              ${requestScope.resultmsg}
+            </div>
+        </c:if>
+
+        <a href="/ProjectOne/jsp/member/viewprofile">View profile</a> <br>
+        <a href="/ProjectOne/jsp/sitter/listjob">Apply for a Job</a> <br>
+        <a href="/ProjectOne/jsp/sitter/listjobapp">View your applications</a> <br>
+        <a href="/ProjectOne/jsp/member/logout">Logout</a> <br>
+    </div>
  
 </body>
 </html>

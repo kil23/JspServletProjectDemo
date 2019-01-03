@@ -18,7 +18,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      Welcome <%= session.getAttribute("username") %>
+      Welcome  ${user.fname}
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/ProjectOne/jsp/seeker/homepage.jsp">Home</a></li>
@@ -27,34 +27,35 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     	<li><a href="/ProjectOne/jsp/profile.jsp">Profile</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-          <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+          <li><a href="/ProjectOne/jsp/visitor/index.jsp"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
     </ul>
   </div>
 </nav>
-	
-	<table >
-		<tr>
-			<td>
-				<button> Post a job</button>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button> List job </button>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button> Edit Profile </button>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button> Close Account </button>
-			</td>
-		</tr>
-		
-	</table>
+
+<div class="container mt-5 w-25">
+        <div id="wrapper">
+            <div id="header">
+                <h3 class="text-center mb-5">Welcome to Seeker Homepage.</h3>
+            </div>
+        </div>
+
+        <c:if test="${not empty requestScope.errormsg}">
+            <div class="alert alert-danger">
+              ${requestScope.errormsg}
+            </div>
+        </c:if>
+
+        <c:if test="${not empty requestScope.resultmsg}">
+            <div class="alert alert-success">
+              ${requestScope.resultmsg}
+            </div>
+        </c:if>
+
+        <a href="/ProjectOne/jsp/seeker/postjob">Post a new job</a> <br>
+        <a href="/ProjectOne/jsp/member/viewprofile">View profile</a> <br>
+        <a href="/ProjectOne/jsp/seeker/listjob">View posted jobs</a> <br>
+        <a href="/ProjectOne/jsp/member/logout">Logout</a>
+    </div>
  
 </body>
 </html>

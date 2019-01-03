@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
 				 session.setAttribute("username", sitter.getFname());
 				 session.setAttribute("id", sitter.getId());
 				 session.setAttribute("type", sitter.getType());
-				response.sendRedirect("/ProjectOne/jsp/sitter/homepage.jsp");
+				 response.sendRedirect("/ProjectOne/jsp/sitter/homepage.jsp");
 			}
 		}else {
 			request.setAttribute("errorsReg", errorRegMap);

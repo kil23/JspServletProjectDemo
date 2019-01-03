@@ -7,8 +7,35 @@
 <title> Apply to Job</title>
 </head>
 <body>
-	<pre>*** Job Application ***</pre>
-	<form action="/sitter/sitter.do"> 
+
+	<div class="container mt-5 w-25 mb-5 center-block">
+        <div id="wrapper">
+            <div id="header">
+                <h3 class="text-center mb-3">${requestScope.Title}</h3>
+            </div>
+        </div>
+        <form action="/ProjectOne/jsp/sitter/applyjob" method="post">
+            <input type="hidden" name="jobid" value="${JobId}" />
+
+            <div class="form-group">
+                <label for="expPay">Expected Pay:</label>
+                <input type="number" class="form-control" name="expectedpay" id="expPay" step="any" value="${jobApplication.expectedPay}">
+                <c:if test="${not empty jobApplication.errors['expectedPay']}">
+                    <div class="alert alert-danger">
+                        ${jobApplication.errors['expectedPay']}
+                    </div>
+                </c:if>
+            </div>
+
+            <div style="text-align:center">
+                <input type="submit" class="btn btn-default" value="Apply"/>
+            </div>
+        </form>
+        </br></br>
+        <div style="text-align:center">
+            <a href="/ProjectOne/" class="btn btn-primary" role="button" >Home</a>
+        </div>
+    </div>
 	
 	Title: 
 	
@@ -21,6 +48,5 @@
 	Expected_pay (in $ per hour) : <input type="text" name="expectedpay" >
 	
 	<input type="submit" value="Apply">
-	</form>
 </body>
 </html>

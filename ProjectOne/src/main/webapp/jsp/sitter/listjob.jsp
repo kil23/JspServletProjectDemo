@@ -27,19 +27,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="tempJob" items="${JobsList}">
+                    <c:forEach var="joblisting" items="${joblist}">
 
-                        <c:url var="tempLink" value="/sitter/apply-job">
+                        <c:url var="applylink" value="/ProjectOne/jsp/sitter/applyjob">
                             <c:param name="command" value="APPLY"/>
-                            <c:param name="JobId" value="${tempJob.jobId}"/>
+                            <c:param name="Jobid" value="${joblisting.jobid}"/>
                         </c:url>
 
                         <tr>
-                            <td> ${tempJob.title} </td>
-                            <td> ${tempJob.payPerHour} </td>
-                            <td> <fmt:formatDate value="${tempJob.startDate}" pattern="dd-MM-yyyy" /> </td>
+                            <td> ${joblisting.title} </td>
+                            <td> ${joblisting.payPerHour} </td>
+                            <td> <fmt:formatDate value="${joblisting.startDate}" pattern="dd-MM-yyyy" /> </td>
+                            <td> <fmt:formatDate value="${joblisting.endDate}" pattern="dd-MM-yyyy" /> </td>
                             <td>
-                                <a href="${tempLink}">Apply</a>
+                                <a href="${link}">Apply</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -48,7 +49,7 @@
         </div>
         <br></br>
         <div style="text-align:center">
-            <a href="/HomeJobMarketplace/" class="btn btn-primary" role="button" >Home</a>
+            <a href="/ProjectOne/" class="btn btn-primary" role="button" >Home</a>
         </div>
     </div>
 </body>

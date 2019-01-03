@@ -113,7 +113,7 @@ public class MemberService {
 		if(type == Member.Type.Seeker) {
 			List<Job> jobsList = jobDao.getUserJobs(userid);
 			for(Job job: jobsList) {
-				int numOfDeletedJobs = jobAppDao.deleteUsingJobAppId(job.getJobid());
+				int numOfDeletedJobs = jobAppDao.deleteUsingJobId(job.getJobid());
 				if(numOfDeletedJobs >= 0) {
 					jobDao.deleteJob(job.getJobid());
 				}

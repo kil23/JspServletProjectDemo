@@ -20,14 +20,15 @@
                 <thead>
                     <tr>
                         <th> Name </th>
-                        <th> Status </th>
                         <th> Expected Pay </th>
+                        <th> Status </th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="jobApplication" items="${jobApp}">
-                        <tr>
-                            <td> ${jobApplication.sitterName} </td>
+                        <tr> 
+                        	<td> ${name} </td>                           
                             <td> ${jobApplication.status} </td>
                             <td> ${jobApplication.expectedPay} </td>
                         </tr>
@@ -37,7 +38,7 @@
         </div>
          <br>
         <div style="text-align:center">
-            <a href="/HomeJobMarketplace/" class="btn btn-primary" role="button" >Home</a>
+            <a href="/ProjectOne/" class="btn btn-primary" role="button" >Home</a>
         </div>
      </div>
 </body>

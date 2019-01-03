@@ -1,7 +1,12 @@
 package com.myapp.listener;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import com.myapp.util.ContextConnectionUtil;
 
 public class ApplicationListener implements ServletContextListener {
 

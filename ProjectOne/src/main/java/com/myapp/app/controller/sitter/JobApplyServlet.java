@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.myapp.app.form.JobAppform;
 import com.myapp.dao.model.Job;
-import com.myapp.dao.model.Sitter;
 import com.myapp.service.SitterService;
 import com.myapp.util.ContextConnectionUtil;
 import com.myapp.util.PopulateForm;
@@ -51,7 +50,15 @@ public class JobApplyServlet extends HttpServlet {
 		HashMap<String, String> errorPay= jobAppform.Authenticate();
 		if(errorPay.isEmpty()) {
 			boolean applied = SitterService.applyJob(jobAppform);
+			if(applied) {
+				response.sendRedirect("/ProjectOne/jsp/sitter/homepage?success=true");
+			}else {
+				response.sendRedirect("/ProjectOne/jsp/sitter/homepage?success=false");
+			}
+		}else {
+			request.setAttribute("errorPay", errorPay);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ProjectOne/jsp/sitter/applytojob");
+			requestDispatcher.forward(request, response);
 		}
 	}
-
 }
