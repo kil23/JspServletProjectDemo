@@ -15,7 +15,20 @@ public class DeleteJobServlet extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userid = ContextConnectionUtil.get().getMember().getId();
-		 
+		String job_id = request.getParameter("Jobid");
+		if(job_id!=null && !job_id.trim().isEmpty() && job_id.matches("^[0-9]+$")){
+			int jobid = Integer.parseInt(job_id);
+			boolean isDeleted = false;
+			Job job = SeekerService.getJobByJobid(job_id);
+			if(userid == job.getPostedBy()){
+				isDeleted = SeekerService.deleteJob(jobid)
+			}
+			if(isDeleted){
+				response.sendredirect("/ProjectOne/jsp/seeker/listjob?success=true");
+			}else {
+				response.sendredirect("/ProjectOne/jsp/seeker/listjob?success=false");
+			}
+		}
 		
 	}
 }

@@ -20,7 +20,12 @@ public class SitterService {
 		}
 		return false;
 	}
-	
+
+	public static boolean updateJobApplication(JobAppform jobAppform){
+		JobAppDao jobAppDao = new JobAppDao();
+		return jobAppDao.updateUsingJobApp(jobAppform);
+	}
+
 	public static boolean applyJob(JobAppform jobAppform) {
 		JobAppDao jobAppDao = new JobAppDao();
 		int userid = Integer.parseInt(jobAppform.getMemberid());
@@ -42,7 +47,15 @@ public class SitterService {
 		JobApplication application = appDao.getJobAppByJobAppId(jobAppid);
 		return application;
 	}
-	
+
+	public static String getJobApplicationTitleByJobAppid(int jobAppid){
+		JobAppDao jobAppDao = new JobAppDao();
+		JobApplication jobApplication = jobAppDao.getJobAppByJobAppId(jobAppid);
+		JobDao jobDao = new JobDao();
+		Job job = jobDao.getJob(jobApplication.getJobId());
+		return job.getTitle();
+	}
+
 	public static boolean deleteJobApp(int JobAppid) {
 		JobAppDao jobAppDao = new JobAppDao();
 		boolean result = jobAppDao.deleteJobAppUsingJobAppId(JobAppid);

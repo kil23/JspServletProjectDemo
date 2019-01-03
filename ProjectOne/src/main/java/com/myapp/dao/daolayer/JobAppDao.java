@@ -14,7 +14,7 @@ import com.myapp.util.ContextConnectionUtil;
 
 public class JobAppDao implements JobAppDaoInterf {
 
-	public JobApplication getJobAppByJobAppId(int jobAppid) {
+		public JobApplication getJobAppByJobAppId(int jobAppid) {
 		Connection conn = ContextConnectionUtil.getConnection();
 		JobApplication jobApp = null;
 		String sql = "Select * from jobapplication Where id=?";

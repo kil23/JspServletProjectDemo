@@ -1,2 +1,3 @@
 .idea/**
 WEB-INF/classes/**
+/bin/
