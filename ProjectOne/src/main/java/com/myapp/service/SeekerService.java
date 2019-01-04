@@ -9,13 +9,17 @@ import java.util.List;
 
 import com.myapp.app.form.JobAppform;
 import com.myapp.app.form.Jobform;
+import com.myapp.app.form.Profileform;
 import com.myapp.dao.daolayer.JobAppDao;
 import com.myapp.dao.daolayer.JobDao;
 import com.myapp.dao.daolayer.MemberDao;
+import com.myapp.dao.daolayer.SeekerDao;
 import com.myapp.dao.model.Job;
 import com.myapp.dao.model.JobApplication;
 import com.myapp.dao.model.JobApplication.Status;
 import com.myapp.dao.model.Member;
+import com.myapp.dao.model.Member.Type;
+import com.myapp.dao.model.Seeker;
 
 public class SeekerService {
 	
@@ -33,6 +37,20 @@ public class SeekerService {
 			seekerjobs.add(new Jobform(jobid, title, userid, startdate, enddate, status, payperhr));
 		}
 		return seekerjobs;
+	}
+	
+	public static Profileform getProfiledataByUserid(int userid) {
+		SeekerDao seekerDao = new SeekerDao();
+		Seeker seeker = seekerDao.getSeeker(userid);
+		String fname = seeker.getFname();
+		String lname = seeker.getLname();
+		String phoneNo = String.valueOf(seeker.getPhone());
+		Type type = seeker.getType();
+		String email = seeker.getEmail();
+		String address = seeker.getAddr();
+		String numChild = String.valueOf(seeker.getTotalChildren());
+		String spouseName = seeker.getSpouseName();
+		return new Profileform(fname, lname, phoneNo, type, email, address, null, null, numChild, spouseName);
 	}
 	
 	public static String getNameByid(int userid) {

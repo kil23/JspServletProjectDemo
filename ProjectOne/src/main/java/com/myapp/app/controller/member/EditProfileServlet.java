@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 public class EditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/member/editprofile.jsp");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ProjectOne/jsp/member/editprofile.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

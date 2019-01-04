@@ -8,7 +8,7 @@
 <title>Profile</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/editprofile" method="get">
+	<form action="/member/editprofile" method="get">
 		<div class="form-group">
             <label for="firstname">First Name:</label>
             <input type="text" class="form-control" name="fname" id="firstname" value="${sessionScope.user.fname}" readonly="readonly">

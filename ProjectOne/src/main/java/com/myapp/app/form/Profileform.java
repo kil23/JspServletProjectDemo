@@ -39,6 +39,21 @@ public class Profileform {
 		this.spouseName = spouseName;
 	}
 	
+	public Profileform(String fname, String lname, String phone, Type type, String email, String addr, String yrExp, String expectedPay, String numChild, String spouseName) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.phone = phone;
+		this.type = type;
+		this.email = email;
+		this.addr = addr;
+		this.yrExp = yrExp;
+		this.expectedPay = expectedPay;
+		this.numChild = numChild;
+		this.spouseName = spouseName;
+	}
+	
+	
 	public Profileform() {
 	}
 

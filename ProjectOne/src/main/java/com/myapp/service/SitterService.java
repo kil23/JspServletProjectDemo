@@ -5,11 +5,17 @@ import java.util.List;
 
 import com.myapp.app.form.JobAppform;
 import com.myapp.app.form.Jobform;
+import com.myapp.app.form.Profileform;
 import com.myapp.dao.daolayer.JobAppDao;
 import com.myapp.dao.daolayer.JobDao;
+import com.myapp.dao.daolayer.SeekerDao;
+import com.myapp.dao.daolayer.SitterDao;
 import com.myapp.dao.model.Job;
 import com.myapp.dao.model.JobApplication;
+import com.myapp.dao.model.Seeker;
+import com.myapp.dao.model.Sitter;
 import com.myapp.dao.model.JobApplication.Status;
+import com.myapp.dao.model.Member.Type;
 
 public class SitterService {
 	
@@ -46,6 +52,20 @@ public class SitterService {
 		JobDao jobDao = new JobDao();
 		Job job = jobDao.getJob(jobid);
 		return job;
+	}
+	
+	public static Profileform getProfiledataByUserid(int userid) {
+		SitterDao sitterDao = new SitterDao();
+		Sitter sitter = sitterDao.getSitter(userid);
+		String fname = sitter.getFname();
+		String lname = sitter.getLname();
+		String phoneNo = String.valueOf(sitter.getPhone());
+		Type type = sitter.getType();
+		String email = sitter.getEmail();
+		String address = sitter.getAddr();
+		String yrExp = String.valueOf(sitter.getYrExp());
+		String ePay = String.valueOf(sitter.getEpay());
+		return new Profileform(fname, lname, phoneNo, type, email, address, yrExp, ePay, null, null);
 	}
 	
 	public static List<Jobform> getJobListByUserid(int userid){

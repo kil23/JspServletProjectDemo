@@ -51,10 +51,10 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
             </div>
         </c:if>
 
-        <a href="/ProjectOne/jsp/member/viewprofile">View profile</a> <br>
-        <a href="/ProjectOne/jsp/sitter/listjob">Apply for a Job</a> <br>
-        <a href="/ProjectOne/jsp/sitter/listjobapp">View your applications</a> <br>
-        <a href="/ProjectOne/jsp/member/logout">Logout</a> <br>
+        <a href="${pageContext.request.contextPath}/member/viewprofile">View profile</a> <br>
+        <a href="${pageContext.request.contextPath}/jsp/sitter/listjob">Apply for a Job</a> <br>
+        <a href="${pageContext.request.contextPath}/jsp/sitter/listjobapp">View your applications</a> <br>
+        <a href="${pageContext.request.contextPath}/jsp/member/logout">Logout</a> <br>
     </div>
  
 </body>
